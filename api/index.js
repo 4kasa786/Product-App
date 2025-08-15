@@ -9,6 +9,7 @@ import cookieParser from 'cookie-parser'
 import mongoose from 'mongoose';
 import authRoutes from './routes/auth.route.js';
 import productRoutes from './routes/product.route.js';
+import path from 'path';
 
 const app = express();
 
@@ -18,13 +19,19 @@ mongoose.connect(process.env.MONGO).then(() => {
     .catch((err) => {
         console.log("Error connecting to MongoDB:", err);
     })
-
+const __dirname = path.resolve();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
+
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+})
 
 app.use((err, req, res, next) => {
     const statusCode = err.status || 500;
