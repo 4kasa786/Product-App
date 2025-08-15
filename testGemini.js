@@ -1,3 +1,6 @@
+
+//This is a test file for the Gemini API using the Google Generative AI library.
+
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import dotenv from 'dotenv';
 
