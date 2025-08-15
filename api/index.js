@@ -1,11 +1,14 @@
-import express from 'express';
 import dotenv from 'dotenv';
+dotenv.config(); // Move this to be the FIRST thing
+
+
+// console.log('GEMINI_API_KEY loaded:', process.env.GEMINI_API_KEY ? 'YES' : 'NO');
+
+import express from 'express';
 import cookieParser from 'cookie-parser'
 import mongoose from 'mongoose';
 import authRoutes from './routes/auth.route.js';
-
-
-dotenv.config(); // Load environment variables from .env file
+import productRoutes from './routes/product.route.js';
 
 const app = express();
 
@@ -16,21 +19,18 @@ mongoose.connect(process.env.MONGO).then(() => {
         console.log("Error connecting to MongoDB:", err);
     })
 
-
-
-app.use(express.json()); // Middleware to parse JSON bodies
-app.use(cookieParser()); // Middleware to parse cookies
-
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use('/auth', authRoutes);
-
+app.use('/products', productRoutes);
 
 app.use((err, req, res, next) => {
     const statusCode = err.status || 500;
     const message = err.message || "Internal Server Error";
     res.status(statusCode).json({
-        success: false, //this is telling the client that the request was not successful
+        success: false,
         statusCode,
         message,
     })
