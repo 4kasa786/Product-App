@@ -253,7 +253,7 @@ export const getSingleProduct = async (req, res, next) => {
             return next(errorHandler(400, "Invalid product ID format"));
         }
 
-        const product = await Product.findById(id).populate("createdBy", "name email");
+        const product = await Product.findById(id).populate("createdBy", "name email username");
 
         if (!product) {
             return next(errorHandler(404, "Product not found"));
