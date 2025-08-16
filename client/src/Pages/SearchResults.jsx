@@ -201,7 +201,7 @@ const SearchResults = () => {
             </div>
 
             {/* Search Form */}
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mb-6">
+            <div className="bg-white  p-6 rounded-lg shadow-md mb-6">
                 <form onSubmit={handleSearch} className="space-y-4">
                     {/* Main Search Input */}
                     <div className="flex gap-4">

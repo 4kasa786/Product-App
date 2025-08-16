@@ -1,10 +1,8 @@
 import dotenv from 'dotenv';
 dotenv.config(); // Move this to be the FIRST thing
 
-
-// console.log('GEMINI_API_KEY loaded:', process.env.GEMINI_API_KEY ? 'YES' : 'NO');
-
 import express from 'express';
+import cors from 'cors'; // Add this import
 import cookieParser from 'cookie-parser'
 import mongoose from 'mongoose';
 import authRoutes from './routes/auth.route.js';
@@ -19,7 +17,15 @@ mongoose.connect(process.env.MONGO).then(() => {
     .catch((err) => {
         console.log("Error connecting to MongoDB:", err);
     })
+
 const __dirname = path.resolve();
+
+// Add CORS middleware BEFORE other middleware
+app.use(cors({
+    origin: true, // Allow all origins
+    credentials: true
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -43,6 +49,7 @@ app.use((err, req, res, next) => {
     })
 })
 
-app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 })
