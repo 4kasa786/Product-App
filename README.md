@@ -7,7 +7,7 @@
 
 **Product-App** is a full-stack web application for managing products. Users can create, view, update, delete, and generate products using AI prompts. It features authentication, CRUD operations with calculated fields, pagination, filtering, and a responsive frontend built with React.
 
-Live Demo: [https://product-app-nayx.onrender.com](https://product-app-nayx.onrender.com)
+Live Demo: [https://product-app-1-mxxo.onrender.com](https://product-app-1-mxxo.onrender.com)
 
 ---
 
