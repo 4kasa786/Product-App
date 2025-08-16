@@ -1,8 +1,8 @@
 import dotenv from 'dotenv';
-dotenv.config(); // Move this to be the FIRST thing
+dotenv.config();
 
 import express from 'express';
-import cors from 'cors'; // Add this import
+
 import cookieParser from 'cookie-parser'
 import mongoose from 'mongoose';
 import authRoutes from './routes/auth.route.js';
@@ -20,11 +20,7 @@ mongoose.connect(process.env.MONGO).then(() => {
 
 const __dirname = path.resolve();
 
-// Add CORS middleware BEFORE other middleware
-app.use(cors({
-    origin: true, // Allow all origins
-    credentials: true
-}));
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -49,7 +45,7 @@ app.use((err, req, res, next) => {
     })
 })
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+
+app.listen(3000, () => {
+    console.log(`Server is running on port 3000`);
 })
