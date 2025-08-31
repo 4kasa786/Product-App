@@ -4,6 +4,7 @@ import bcryptjs from 'bcryptjs';
 import { errorHandler } from "../utils/error.js"
 import jwt from 'jsonwebtoken'
 
+//added auth controller functions here
 export const signup = async (req, res, next) => {
     const { username, email, password } = req.body;
 
@@ -16,7 +17,7 @@ export const signup = async (req, res, next) => {
     checkUser = await User.findOne({ username });
     if (checkUser) {
         return next(errorHandler(400, "User already exists"));
-    }
+    }ß
     const hashedPassword = bcryptjs.hashSync(password, 10)
     const newUser = new User({ username, email, password: hashedPassword });
 
